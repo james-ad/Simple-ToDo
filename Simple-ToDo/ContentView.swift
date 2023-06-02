@@ -18,20 +18,52 @@ struct ListEntry: View {
                     isOn.toggle()
                 }
         }
-        .frame(maxWidth: .infinity, idealHeight: 30)
+        .frame(maxWidth: .infinity, idealHeight: 35)
         .padding(10)
-        .border(.black, width: 2)
+        .border(.black, width: 1.5)
         .cornerRadius(2)
     }
 }
-struct ContentView: View {
+
+struct AddItemButtonView: View {
+    @State var shouldShowAlert: Bool = false
+    
     var body: some View {
-        ScrollView() {
-            ForEach(0..<10) { _ in
-                ListEntry()
+        HStack {
+            Spacer()
+            Button() {
+                shouldShowAlert.toggle()
+            } label: {
+                Image(systemName: "plus")
+                    .resizable(resizingMode: .stretch)
+            }
+            .frame(width: 50, height: 50, alignment: .trailing)
+            .padding()
+            .background(.blue)
+            .foregroundColor(Color(white: 0.95))
+            .clipShape(Circle())
+            .alert(isPresented: $shouldShowAlert) {
+                Alert(title: Text("Add item to list"))
             }
         }
         .padding()
+    }
+}
+
+struct ContentView: View {
+    var body: some View {
+            ScrollView() {
+                ForEach(0..<10) { _ in
+                    ListEntry()
+                }
+            }
+            .padding(.horizontal, 9)
+            .padding(.top, 5)
+            .padding(.bottom, 0)
+            .border(.black, width: 1.5)
+            .cornerRadius(2)
+            .padding(5)
+        AddItemButtonView()
     }
 }
 
