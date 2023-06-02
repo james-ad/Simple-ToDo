@@ -18,10 +18,10 @@ struct ListEntry: View {
                     isOn.toggle()
                 }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, idealHeight: 30)
         .padding(10)
         .border(.black, width: 2)
-        .cornerRadius(10)
+        .cornerRadius(2)
     }
 }
 struct ContentView: View {
