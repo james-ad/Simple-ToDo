@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ListEntry: View {
     @State var isOn: Bool = false
+    
     var body: some View {
         HStack {
             Text("Hola, World!")
@@ -36,12 +37,17 @@ struct AddItemButtonView: View {
             } label: {
                 Image(systemName: "plus")
                     .resizable(resizingMode: .stretch)
+                        
             }
             .frame(width: 50, height: 50, alignment: .trailing)
             .padding()
             .background(.blue)
             .foregroundColor(Color(white: 0.95))
             .clipShape(Circle())
+            .overlay(Circle()
+                .stroke(.black, lineWidth: 0.35)
+            )
+            .shadow(color: .gray, radius: 0.9, x: 1, y: 3)
             .alert(isPresented: $shouldShowAlert) {
                 Alert(title: Text("Add item to list"))
             }
